@@ -1,0 +1,14 @@
+<beans
+	xmlns="http://www.springframework.org/schema/beans http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                         http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+                         
+<bean id="stockBo" class="com.anel.stock.bo.impl.StockBoImpl">
+<property name="stockDao" ref="stockDao"/>
+</bean>
+
+
+<bean id="stockBo" class="com.anel.stock.dao.impl.StockDaoImpl">
+<property name="sessioFactory" ref="sessionFactory"/>
+</bean>
