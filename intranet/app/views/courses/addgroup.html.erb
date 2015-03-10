@@ -1,0 +1,75 @@
+  <h1>Groups</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Day</th>
+      <th>Name</th>
+      <th> Max Number of students</th>
+      <%if current_user.is_admin? %>
+        <th>Actions</th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <% @course.groups.each do |u| %>
+    <tr>
+      <td><%= link_to u.id, show_course_users_path(id: u.id)%></td>
+      <td><%= u.day %></td>
+      <td><%= u.name %></td>
+      <td><%= u.tscope %></td>
+
+        <% if current_user.is_admin?%>
+          <td><%= link_to "Edit", group_edit_path(id1: @course.id, id2: u.id) %>
+          <%= link_to "Delete", group_remove_path(id1: @course.id, id2: u.id), method: :delete %></td>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% if current_user.is_admin? %>
+<h1> New group</h1>
+
+<%= form_for @course.groups.new, url: create_group_path(@course.id), :html => { :class => "form-horizontal course" } do |f| %>
+
+    <% if @course.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@course.errors.count, "error") %> prohibited this course from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @course.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="control-group">
+    <%= f.label :Day, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :day, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+  </div>
+  <div class="control-group">
+    <%= f.label :Number_of_students, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :tscope, :class => 'form-control' %>
+    </div>
+  </div>
+
+  <%= f.submit nil, :value => "Add Group", :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            courses_path, :class => 'btn btn-default' %>
+  <% end %>
+<% end %>

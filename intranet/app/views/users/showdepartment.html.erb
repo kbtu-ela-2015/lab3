@@ -1,0 +1,44 @@
+<h1>Department</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <%if current_user.is_admin?%>
+      <th>Edit</th>
+      <th>Delete</th>
+      <%end%>
+    </tr>
+  </thead>
+  <tbody>
+    <% @department.each do |d| %>
+      <tr>
+        <td><%= link_to d.id, department_show_path(d) %></td>
+        <td><%= d.name %></td>
+          <% if current_user.is_admin? %>
+           <td> <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      department_edit_path(d.id), :class => 'btn btn-default btn-xs' %></td>
+          <td><%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      department_destroy_path(d.id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %></td>
+          <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", :root, :class => 'btn btn-primary'%>
+<% if current_user.is_admin? %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_department_path,
+            :class => 'btn btn-primary' %>
+
+<% else %>
+<%end%>
+
+<!-- <select class="js-update">
+
+</select>
+
+<select class="js-worker"></select> -->

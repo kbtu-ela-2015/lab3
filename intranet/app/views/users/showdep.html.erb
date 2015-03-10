@@ -1,0 +1,23 @@
+<h2><%= @department.id %></h2>
+<hr>
+<h2><%= @department.name %></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Id</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @user.each do |i| %>
+    <tr>
+    	<td></td>
+      <td><%= link_to i.id, user_show_path(i) %></td>
+      <td><%= i.name %></td>
+      <td><%= i.surname %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+ <%- model_class = Course -%>
+<div class="page-header">
+  <h1>Registered <%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+ <table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Day</th>
+      <th>Name</th>
+
+      <th>Course</th>
+
+    </tr>
+  </thead>
+  <tbody>
+	    <% @user.each do |u| %>
+			    <tr>
+			      <td><%= u.id%></td>
+			      <td><%= u.day %></td>
+            <td><%= u.name %></td>
+
+            <td><%= u.course.title if u.course %></td>
+			    </tr>
+      <% end %> 
+
+  </tbody>
+</table>
+<%= link_to "Back", :back , :class => 'btn btn-primary'%>

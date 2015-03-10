@@ -1,0 +1,46 @@
+<%- model_class = User -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>User Name</th>
+      <th>User Surname</th>
+      <th>User Age</th>
+      <th>User Email</th>
+      <th>User Faculty</th>
+      <th>User Specialization</th>
+      <th>User Role</th>
+    </tr>
+  </thead>
+  <tbody>
+		<% @users.each do |u| %>
+    <tr>
+    	<td><%= link_to u.id, user_show_path(id: u)%></td>
+      <td><%= u.name %></td>
+      <td><%= u.surname %></td>
+      <td><%= u.age %></td>
+      <td><%= u.email %></td>
+      <td><%= u.faculty %></td>
+      <td><%= u.specialization %></td>
+      
+      <% if u.role == 99 %> 
+        <td>Guest</td>
+        <% elsif u.role == 2%>
+        <td>Admin</td>
+        <% elsif u.role == 0%>
+        <td>Student</td>
+        <% elsif u.role == 1%>
+        <td>Teacher</td>
+
+      <%end%>
+      
+      <!-- <td><%= u.role %></td> -->
+        
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", :root , :class => 'btn btn-primary'%>

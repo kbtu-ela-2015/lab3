@@ -1,0 +1,85 @@
+<%= form_for @user, url: user_update_path(@user), method: :put, :html => { :class => "form-horizontal course" } do |f| %>
+
+    <% if @user.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@user.errors.count, "error") %> prohibited this course from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @user.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :surname, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :surname, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:surname]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :age, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :age, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:age]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :faculty, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :faculty, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:faculty]) %>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :department, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :department, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:department]) %>
+  </div>
+
+    <div class="control-group">
+    <%= f.label :specialization, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :specialization, :class => 'form-control' %>
+    </div>
+    <%= error_span(@user[:specialization]) %>
+  </div>
+
+   <div class="control-group">
+    <%= f.label :role, :class => 'control-label' %>
+    
+
+
+    <div class="controls">
+      <select name = "user[role]" id="user_role" class="form-control">
+        <option value="99">Guest</option>    
+        <option value="0">Student</option>    
+        <option value="1">Teacher</option>    
+        <option value="2">Admin</option>    
+      </select>
+    </div>
+    <%= error_span(@user[:age]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            :back, :class => 'btn btn-default' %>
+
+<% end %>
