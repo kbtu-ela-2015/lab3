@@ -1,0 +1,29 @@
+<h1>Groups</h1>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Day</th>
+      <th>Name</th>
+      <th>Number of students</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @course.groups.each do |u| %>
+    <tr>
+      <td><%= u.id%></td>
+      <td><%= u.day %></td>
+      <td><%= u.name %></td>
+      <td><%= u.cscope %>/<%= u.tscope %></td>
+
+        <% if user_signed_in?%>
+          <td><%= link_to "Register", user_reg_path(id2: u.id) %></td>
+          <td><%= link_to "Unregister", "#" %></td>
+          <!-- <td><%= link_to "Delete", group_remove_path(id1: @course.id, id2: u.id), method: :delete %></td> -->
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", :list_courses , :class => 'btn btn-primary'%>

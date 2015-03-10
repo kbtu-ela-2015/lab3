@@ -1,0 +1,60 @@
+<%- model_class = Course -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:title) %></th>
+      <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <% if current_user.is_admin? %>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <% end %>
+
+    </tr>
+  </thead>
+  <tbody>
+    <% @courses.each do |course| %>
+      <tr>
+        <td><%= link_to course.id, course_path(course) %></td>
+        <td><%= course.title %></td>
+        <td><%= course.description %></td>
+        <td><%= course.created_at %></td>
+        <td>
+
+          <% if current_user.is_admin? %>
+            <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                      edit_course_path(course), :class => 'btn btn-default btn-xs' %>
+          <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                      course_destroy_path(course.id),
+                      :method => :delete,
+                      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+                      :class => 'btn btn-xs btn-danger' %>
+          <%= link_to t('.groups', :default => t("helpers.links.groups")),
+                      add_group_path(course), :class => 'btn btn-default btn-xs' %>
+
+            <% elsif current_user.is_teacher? %>
+              <%= link_to t('.groups', :default => t("helpers.links.groups")),
+                      add_group_path(course), :class => 'btn btn-default btn-xs' %>
+            
+          <% end %>
+
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", :root , :class => 'btn btn-primary'%>
+<%if current_user.is_admin?%>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_course_path,
+            :class => 'btn btn-primary' %>
+<%end%>
+
+<!-- <select class="js-update">
+
+</select>
+
+<select class="js-worker"></select> -->

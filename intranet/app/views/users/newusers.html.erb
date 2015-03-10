@@ -1,0 +1,40 @@
+<h1>New Users</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>User Name</th>
+      <th>User Surname</th>
+      <th>User Age</th>
+      <th>User Email</th>
+      <th>User Faculty</th>
+      <th>User Specialization</th>
+      <th>User Role</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+		<% @user.each do |u| %>
+    <tr>
+    	<td><%= u.id %></td>
+      <td><%= u.name %></td>
+      <td><%= u.surname %></td>
+      <td><%= u.age %></td>
+      <td><%= u.email %></td>
+      <td><%= u.faculty %></td>
+      <td><%= u.specialization %></td>
+      
+      <% if u.role == 99 %> 
+        <td>Guest</td>
+      <%end%>
+
+        <% if user_signed_in?%>
+          <td><%= link_to "Edit", user_edit_path(id: u.id) %></td>
+          <td><%= link_to "Delete", user_remove_path(id: u.id), method: :delete %></td>
+        <% end %>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to "Back", :root , :class => 'btn btn-primary'%>

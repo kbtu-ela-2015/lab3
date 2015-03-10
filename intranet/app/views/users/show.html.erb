@@ -1,0 +1,10 @@
+<b>ID: </b><p><%= @users.id%></p>
+<b>Email: </b><p><%= @users.email%></p>
+<b>Year of study: </b><p><%= @users.yearofstudy%></p>
+<b>Faculty: </b><p><%= @users.faculty%></p>
+<b>Specialization: </b><p><%= @users.specialization%></p>
+<br>
+<b><%= link_to "Back", users_path%></b>
+<% if current_user.is_admin? %>
+<b><%= link_to "Edit", user_edit_path%></b>
+<% end %>

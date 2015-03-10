@@ -1,0 +1,20 @@
+<h1>News</h1>
+
+<% @news.each do |n|%>
+    <div class="answer">
+      <i><p class="pull-right"><%= n.created_at%></p></i>
+      <b><i><p><%= n.title%></p></i></b>
+      <p><%= n.text%></p>
+
+    <% if current_user.is_admin?%>
+		<p class="pull-right">
+			<%= link_to "Edit", editnews_path(n.id) %>
+	        <%= link_to "Delete", delnews_path(n.id), method: :delete %>
+	    </p>
+    <% end %>
+    </div>
+
+<%end%>
+<% if current_user.is_admin?%>
+        <%= link_to "Add news", addnews_path %>
+<% end %>

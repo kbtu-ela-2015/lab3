@@ -1,0 +1,15 @@
+<h1>Users</h1>
+<table class="table table-striped">
+	<th>Id</th>
+	<th>Name</th>
+	<th>Surname</th>
+	<th>Email</th>
+	<% @group.each do |u|%>
+		<tr>
+			<td><%= u.id%></td>
+			<td><%= u.name%></td>
+			<td><%= u.surname%></td>
+			<td><%= u.email%></td>
+		</tr>
+	<%end%>
+</table>
